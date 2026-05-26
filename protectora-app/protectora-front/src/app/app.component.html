@@ -1,0 +1,108 @@
+<main class="page-shell">
+  <section class="hero-panel" aria-labelledby="titulo-panel">
+    <div class="hero-copy">
+      <span class="eyebrow">Alta de residentes</span>
+      <h1 id="titulo-panel">Nuevo perro en la protectora</h1>
+      <p class="subtitle">
+        Registra sus datos esenciales con una ficha clara, cercana y lista para compartir con el equipo.
+      </p>
+    </div>
+
+    <form class="formulario-perro" (ngSubmit)="agregarPerro()">
+      <div class="photo-preview" aria-label="Foto de marcador de posicion">
+        <div class="photo-frame">
+          <span class="paw-mark" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div>
+          <strong>Foto pendiente</strong>
+          <span>Marcador de posici&oacute;n para la imagen del perro</span>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <label class="field">
+          <span>Nombre</span>
+          <input
+            type="text"
+            name="nombre"
+            [(ngModel)]="nuevoPerro.nombre"
+            placeholder="Ej. Nala"
+            required
+          >
+        </label>
+
+        <label class="field">
+          <span>Edad</span>
+          <input
+            type="number"
+            name="edad"
+            [(ngModel)]="nuevoPerro.edad"
+            min="0"
+            placeholder="3"
+            required
+          >
+        </label>
+
+        <label class="field field-wide">
+          <span>Raza</span>
+          <input
+            type="text"
+            name="raza"
+            [(ngModel)]="nuevoPerro.raza"
+            placeholder="Ej. Mestizo tranquilo"
+            required
+          >
+        </label>
+      </div>
+
+      <button class="boton-agregar" type="submit">
+        <span>A&ntilde;adir perro</span>
+      </button>
+    </form>
+  </section>
+
+  <section class="list-section" aria-labelledby="titulo-listado">
+    <div class="section-heading">
+      <span class="eyebrow">Listado actual</span>
+      <h2 id="titulo-listado">Perros de la protectora</h2>
+    </div>
+
+    <div class="grid-perros">
+      @for (perro of listaPerros; track perro.id) {
+        <article class="tarjeta-perro" [class.tarjeta-adoptada]="perro.adoptado">
+          <div class="foto-placeholder">
+            <span class="paw-mark paw-mark-small" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </div>
+          <div class="info">
+            <h3>{{ perro.nombre }}</h3>
+            <p><strong>Edad:</strong> {{ perro.edad }} a&ntilde;os</p>
+            <p><strong>Raza:</strong> {{ perro.raza }}</p>
+            <span class="estado" [class.adoptado]="perro.adoptado">
+              {{ perro.adoptado ? 'Adoptado' : 'Disponible' }}
+            </span>
+            <button
+              class="boton-adoptar"
+              type="button"
+              [disabled]="perro.adoptado"
+              (click)="adoptar(perro)"
+            >
+              {{ perro.adoptado ? 'Adoptado' : 'Adoptar' }}
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+</main>
