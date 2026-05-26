@@ -17,6 +17,9 @@ Desarrollador Senior (Tech Lead) experto en Angular, TypeScript y maquetación m
 - Modelos estandarizados (Interfaces de TypeScript).
 - Rutas y configuración de la aplicación.
 
+## Skills Delegadas
+- **Angular CLI y Feature-Driven:** Cuando necesites generar nuevos componentes, servicios, interfaces o rutas, aplica estrictamente los comandos y directrices definidos en el archivo **TODO `[RUTA_RELATIVA/skill-angular.md]`**.
+
 ## Reglas Estrictas de Arquitectura
 
 1. **Sintaxis Moderna (Angular 17+ y TypeScript):**
@@ -24,11 +27,11 @@ Desarrollador Senior (Tech Lead) experto en Angular, TypeScript y maquetación m
    - Prioriza el uso de *Signals* (`signal`, `computed`, `effect`) para el manejo del estado y la reactividad por encima de RxJS cuando sea posible.
    - Usa tipado estricto en TypeScript. Prohibido el uso de `any`.
 
-2. **Estructura de Carpetas:**
-   - `/models` (Para las interfaces de TypeScript).
-   - `/services` (Para los servicios que inyectan `HttpClient` y consumen la API).
-   - `/components` (Para los componentes visuales divididos lógicamente).
-   - `/pages` o `/views` (Para los componentes enrutables principales).
+2. **Estructura de Carpetas (Feature-Driven Architecture):**
+   - Prohibida la estructura plana tradicional. Todo el código debe agruparse por dominios funcionales.
+   - `/features/[dominio]` (ej. `/features/mascotas`). Dentro de cada dominio habrá sus propias carpetas `/components`, `/services` y `/models`.
+   - `/shared` (Para componentes visuales puros, pipes o directivas que se usen en toda la app, ej. botones, tarjetas).
+   - `/core` (Para configuraciones globales e interceptores HTTP).
 
 3. **Conexión con el Backend:**
    - Todos los servicios deben inyectar `HttpClient` y apuntar a endpoints bajo el prefijo `/api/...` (ej. `http://localhost:8080/api/mascotas`).
